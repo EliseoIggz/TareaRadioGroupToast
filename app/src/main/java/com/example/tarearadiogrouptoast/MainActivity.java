@@ -2,7 +2,9 @@ package com.example.tarearadiogrouptoast;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -43,9 +45,10 @@ public class MainActivity extends AppCompatActivity {
                     colorCode = Color.YELLOW;
                 }
 
-                Toast toast = Toast.makeText(MainActivity.this, colorName, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                //toast.getView().findViewById(android.R.id.message).setBackgroundColor(colorCode);
+                SpannableStringBuilder cadena = new SpannableStringBuilder(colorName);
+                cadena.setSpan(new ForegroundColorSpan(colorCode), 0, cadena.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                Toast toast = Toast.makeText(MainActivity.this, cadena, Toast.LENGTH_SHORT);
+                //toast.setGravity(Gravity.CENTER, 0, 0);       El gravity me estaba anulando la aplicacion de color a la cadena del toast no sé por que
                 toast.show();
             }
         });
